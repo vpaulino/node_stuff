@@ -1,0 +1,67 @@
+
+<html>
+<head>
+<title> nodejs page </title>
+<script type="text/javascript" src ="http://code.jquery.com/jquery-1.8.2.min.js"  ></script>
+<script type="text/javascript">
+var connection ;
+	
+	function wsConnect()
+	{
+		connection = new WebSocket('ws://127.0.0.1:6969');
+		setTimeout(function() {
+			connection.onopen = function () {
+				alert("connection open");
+			};
+
+			connection.onerror = function (error) {
+				alert("connection error: " + error);
+			};
+			
+			connection.onclose = function(){ alert("closed");};
+		
+		}, 2000);
+	
+	}
+	
+	function sendIt() 
+	{
+		//alert(document.getElementById("messageToSend").value);
+		connection.send(document.getElementById("messageToSend").value);
+	}
+	
+/*
+	$(function() 
+	{		
+		$("#btnwsConnect").click(function() 
+		{
+			alert("clicked");
+			window.WebSocket = window.Websocket || window.MozWebSocket;
+			  if (!window.WebSocket) {
+				alert("no websockets available");
+				}else
+				{
+					var connection = new WebSocket('ws://127.0.0.1:6969');
+
+					connection.onopen = function () {
+						alert("connection open");
+					};
+
+					connection.onerror = function (error) {
+						alert("connection error: " + error);
+					};
+
+				}
+		});
+	});
+	*/
+</script>	
+</head>
+
+<body>
+	<h1>welcome to nodejs served page !! </h1>
+	<br/>
+	<input type="button" onclick="javascript:wsConnect();" id="btnwsConnect" value="connect To WebSocket" />
+	<input type ="text" id="messageToSend" /><input type="button" onclick="javascript:sendIt();" id="btnsendIt" value="Send it"/>
+</body>
+</html>
