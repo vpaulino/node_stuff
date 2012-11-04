@@ -1,0 +1,39 @@
+
+<html>
+<head>
+<title> nodejs page </title>
+<script type="text/javascript" src ="http://code.jquery.com/jquery-1.8.2.min.js"  ></script>
+<script type="text/javascript" src="socket.io/socket.io.js"></script>
+
+  <script>
+  
+		function wsConnect()
+		{
+			var socket = io.connect();
+			socket.on('connect', function () {
+				socket.send(window.location.href);
+			});
+		}
+
+      
+
+        function sendIt() 
+		{
+			//alert(document.getElementById("messageToSend").value);
+			socket.send(document.getElementById("messageToSend").value);
+		}
+
+
+    </script>
+
+ 
+</head>
+
+<body>
+	<h1>welcome to nodejs served page !! </h1>
+	<br/>
+	<input type="button" onclick="javascript:wsConnect();" id="btnwsConnect" value="connect via WebSocket" />
+	<br>
+	<input type ="text" id="messageToSend" /><input type="button" onclick="javascript:sendIt();" id="btnsendIt" value="Send it"/>
+</body>
+</html>
