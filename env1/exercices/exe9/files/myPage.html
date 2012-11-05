@@ -6,13 +6,14 @@
 <script type="text/javascript" src="socket.io/socket.io.js"></script>
 
   <script>
-  
+  		var socket;
 		function wsConnect()
 		{
-			var socket = io.connect();
+			socket = io.connect();
 			socket.on('connect', function () {
 				socket.send(window.location.href);
 			});
+
 		}
 
       
